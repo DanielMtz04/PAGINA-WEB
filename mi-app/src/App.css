@@ -1,0 +1,109 @@
+/* Reset básico */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* Página principal (Índice) */
+.home {
+  background-color: #d50000; /* Rojo OXXO */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Página de contenido */
+.page {
+  background-color: #ffcc00; /* Amarillo OXXO */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Estilo de las tarjetas */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
+
+/* Estilos para los títulos */
+.card h1 {
+  color: #d50000; /* Rojo OXXO */
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+/* Listado dentro de las tarjetas */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0;
+}
+
+.card ul li {
+  background: #ffcc00; /* Amarillo OXXO */
+  color: black;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Botón para regresar */
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #d50000;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #a00000;
+}
+
+/* Estilos para los enlaces del índice */
+.home .card ul li a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #ffcc00;
+  transition: background 0.3s ease;
+}
+
+.home .card ul li a:hover {
+  background-color: #d4aa00;
+}
+
+/* Estilo para el logo */
+.logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+/* Ajustar tamaño de las imágenes dentro de las tarjetas */
+.page-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 15px 0;
+}
