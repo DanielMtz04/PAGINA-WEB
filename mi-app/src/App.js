@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -10,6 +10,7 @@ import "./App.css";
 
 // Imágenes base (ya existentes)
 import oxxoLogo from "./oxxo-logo.png";
+import oxxo from "./oxxo.png";
 import introImg from "./intro.png";
 import empresaImg from "./empresa.png";
 import tamanioImg from "./tamanio.png";
@@ -18,6 +19,9 @@ import historiaImg from "./historia.png";
 import antImg from "./antecedentes.png";
 import organigramaImg from "./organigrama.png";
 import puestosImg from "./puestos.png";
+import introduccionImg from "./introduccion.png";
+import conclusionImg from "./conclusion.png";
+import diegoImg from "./diego.png";
 
 // Imágenes nuevas (ejemplo) para cada área del organigrama
 import recursosHumanosImg from "./recursosHumanos.png";
@@ -27,6 +31,14 @@ import marketingImg from "./marketing.png";
 import produccionImg from "./produccion.png";
 import legalImg from "./legal.png";
 import expansionImg from "./expansion.png";
+
+// Imágenes para la nueva sección de Productos
+import cocaCola from "./coca-cola.png";
+import sabritas from "./sabritas.png";
+import gansito from "./gansito.png";
+import redBull from "./red-bull.png";
+import monster from "./monster.png";
+import maruchan from "./maruchan.png";
 
 // ---------------------------------------------------------------------------
 // Componente genérico Page para mostrar cualquier sección en formato de 'card'
@@ -63,7 +75,7 @@ const Home = () => (
   <div className="home">
     <img src={oxxoLogo} alt="OXXO Logo" className="logo" />
     <div className="card">
-      <h1>Índice</h1>
+      <img src={oxxo} alt="OXXO Logo" className="logo" />
       <ul>
         <li>
           <Link to="/inicio">Inicio</Link>
@@ -93,10 +105,11 @@ const Home = () => (
           <Link to="/organigrama">Organigrama</Link>
         </li>
         <li>
-          <Link to="/valores">Valores de la UANL</Link>
-        </li>
-        <li>
           <Link to="/conclusion">Conclusión</Link>
+        </li>
+        {/* Nuevo enlace para la sección Productos */}
+        <li>
+          <Link to="/productos">Productos</Link>
         </li>
         <li>
           <Link to="/alumno">Alumno</Link>
@@ -110,23 +123,36 @@ const Home = () => (
 // SECCIONES ORIGINALES (Inicio, Introducción, etc.)
 // ---------------------------------------------------------------------------
 
-// (Puedes reacomodar este “Inicio” si así lo deseas)
 const Inicio = () => (
-  <Page
-    title="Inicio"
-    content="Bienvenido al análisis de OXXO."
-    image={introImg}
-  />
+  <Page title="Inicio" content="Bienvenido a OXXO." image={introImg} />
 );
 
 const Alumno = () => (
-  <Page title="Alumno" content="Diego Emiliano Castillo Martínez" />
+  <Page
+    title="Alumno"
+    content={
+      <>
+        <p>Diego Emiliano Castillo Martínez</p>
+        <p>Matrícula 2110622</p>
+      </>
+    }
+    image={diegoImg}
+  />
 );
 
 const Conclusion = () => (
   <Page
     title="Conclusión"
-    content="Este documento ha presentado un análisis completo sobre OXXO y su impacto en el mercado."
+    content={
+      <>
+        <p>
+          Este documento ha presentado un análisis completo sobre OXXO y su
+          impacto en el mercado.
+        </p>
+        <br />
+        <Link to="/ConclusionAlumno">Conclusión Alumno</Link>
+      </>
+    }
     image={introImg}
   />
 );
@@ -141,10 +167,27 @@ const Introduccion = () => (
           Este documento presenta un análisis completo de OXXO, incluyendo su
           historia, estructura organizativa y valores corporativos.
         </p>
-        <Link to="/alumno">Creado por</Link>
+        <br />
+        <Link to="/IntroduccionAlumno">Introducción Alumno</Link>
       </>
     }
     image={introImg}
+  />
+);
+
+const ConclusionAlumno = () => (
+  <Page
+    title="Conclusion Alumno"
+    content="Diego Emiliano Castillo Martínez"
+    image={conclusionImg}
+  />
+);
+
+const IntroduccionAlumno = () => (
+  <Page
+    title="Introducción Alumno"
+    content="Diego Emiliano Castillo Martínez"
+    image={introduccionImg}
   />
 );
 
@@ -796,6 +839,54 @@ const Valores = () => (
 );
 
 // ---------------------------------------------------------------------------
+// NUEVA SECCIÓN: Productos (con un pequeño carrusel)
+// ---------------------------------------------------------------------------
+const productosFamosos = [
+  { nombre: "Coca-Cola", imagen: cocaCola },
+  { nombre: "Sabritas", imagen: sabritas },
+  { nombre: "Gansito", imagen: gansito },
+  { nombre: "Red Bull", imagen: redBull },
+  { nombre: "Monster", imagen: monster },
+  { nombre: "Maruchan", imagen: maruchan },
+];
+
+const Productos = () => {
+  const [index, setIndex] = useState(0);
+
+  const siguiente = () => {
+    setIndex((prevIndex) => (prevIndex + 1) % productosFamosos.length);
+  };
+
+  const anterior = () => {
+    setIndex((prevIndex) =>
+      prevIndex === 0 ? productosFamosos.length - 1 : prevIndex - 1
+    );
+  };
+
+  return (
+    <div className="page">
+      <img src={oxxoLogo} alt="OXXO Logo" className="logo" />
+      <div className="card">
+        <h1>Producto</h1>
+        <img
+          src={productosFamosos[index].imagen}
+          alt={productosFamosos[index].nombre}
+          className="page-image"
+        />
+        <h2>{productosFamosos[index].nombre}</h2>
+        <div>
+          <button onClick={anterior}>Anterior</button>
+          <button onClick={siguiente}>Siguiente</button>
+        </div>
+        <Link className="back-button" to="/">
+          Volver
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+// ---------------------------------------------------------------------------
 // RUTAS PRINCIPALES DE LA APP
 // ---------------------------------------------------------------------------
 export default function App() {
@@ -966,6 +1057,15 @@ export default function App() {
 
         {/* Alumno */}
         <Route path="/alumno" element={<Alumno />} />
+
+        {/* ConclusionAlumno */}
+        <Route path="/ConclusionAlumno" element={<ConclusionAlumno />} />
+
+        {/* IntroduccionAlumno */}
+        <Route path="/IntroduccionAlumno" element={<IntroduccionAlumno />} />
+
+        {/* NUEVA SECCIÓN: Productos */}
+        <Route path="/productos" element={<Productos />} />
       </Routes>
     </Router>
   );
